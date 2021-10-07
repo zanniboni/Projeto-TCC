@@ -18,6 +18,11 @@ while cap.isOpened():
     predictions = model.predict_top(frame)
     labels, boxes, scores = predictions
     print(labels, boxes, scores)
+
+    # Quando detectar um score maio que 0.7, iremos ter o retorno sonoro da detecção
+    if scores >= 0.7:
+        print("Printar categoria")
+
     cor_retangulo = (0, 0, 255)
     start_X = boxes[0][0]
     start_Y = boxes[0][1]

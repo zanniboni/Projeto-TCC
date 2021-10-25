@@ -2,40 +2,32 @@
 # Specify the path to your image
 from detecto import core, utils, visualize
 import cv2
+import pyttsx3
 
 model = core.Model.load('nota_50.pth', ['nota_50'])
 # image = utils.read_image('frames/dinheiro13.jpg')
 # predictions = model.predict_top(image)
 # labels, boxes, scores = predictions
 # visualize.show_labeled_image(image, boxes, labels)
+engine = pyttsx3.init()
 
 
 cap = cv2.VideoCapture(0)
 while cap.isOpened():
     ret, frame = cap.read()
-    (h, w) = frame.shape[:2]
 
     predictions = model.predict_top(frame)
     labels, boxes, scores = predictions
-    print(labels, boxes, scores)
+    detectado = (scores[0] > 0.7)
+    label_detectado = labels[0]
 
     # Quando detectar um score maio que 0.7, iremos ter o retorno sonoro da detecção
-    if scores >= 0.7:
-        print("Printar categoria")
+    if detectado:
+        print(label_detectado)
+        if label_detectado == "nota_50":
+            engine.say("50 reais")
 
-    cor_retangulo = (0, 0, 255)
-    start_X = boxes[0][0]
-    start_Y = boxes[0][1]
-    end_X = boxes[0][2]
-    end_Y = boxes[0][3]
-
-    (start_X, start_Y) = (max(0, start_X), max(0, start_Y))
-    (end_X, end_Y) = (min(w - 1, end_X), min(h - 1, end_Y))
-
-    print((start_X, start_Y))
-    print((end_X, end_Y))
-
-    cv2.rectangle(frame, (start_X, start_Y), (end_X, end_Y), cor_retangulo, 1)
+        engine.runAndWait()
 
     cv2.imshow('Object detection', frame)
 
@@ -44,3 +36,4 @@ while cap.isOpened():
 
 cap.release()
 cv2.destroyAllWindows()
+

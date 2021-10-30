@@ -7,15 +7,15 @@
 # -------- Código exemplo para remover todos os png's da pasta
 # import glob
 # import pathlib
-# for file in glob.glob('nota-20-reais/*.png'):
+# for file in glob.glob('nota-10-reais/*.png'):
 #   path = pathlib.Path(file)
 #   path.unlink()
 
 # ----------- Código para renomear os arquivos da pasta "Collection"
-# import os
-# os.getcwd()
-# collection = "nota-20-reais"
-# for i, filename in enumerate(os.listdir(collection)):
-#   print(filename)
-#   os.rename(collection + "/" + filename, collection + "/nota-20-" + str(i) + ".jpg")
+import os
+os.getcwd()
+collection = "nota-100-reais"
+for i, filename in enumerate(os.listdir(collection)):
+  print(filename)
+  os.rename(collection + "/" + filename, collection + "/nota-100-" + str(i) + ".jpg")
 

@@ -6,7 +6,11 @@ import pyttsx3
 import numpy as np
 
 model = core.Model.load('notas.pth', ['nota_10','nota20',
-                                      'nota100','25cent','nota_5','1real','nota_2','5cent','maca','nota50','50cent'])
+                                      'nota100','25cent',
+                                      'nota_5','1real',
+                                      'nota_2','5cent',
+                                      'maca','nota50','50cent'])
+                                      
 # image = utils.read_image('frames/dinheiro13.jpg')
 # predictions = model.predict_top(image)
 # labels, boxes, scores = predictions

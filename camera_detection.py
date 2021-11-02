@@ -5,13 +5,9 @@ import cv2
 import pyttsx3
 import numpy as np
 
-model = core.Model.load('notas.pth', ['nota_10','nota20',
-                                      'nota100','25cent',
-                                      'nota_5','1real',
-                                      'nota_2','5cent',
-                                      'maca','nota50','50cent'])
+model = core.Model.load('notas_final.pth', ['nota_10','nota20','nota100','25cent','nota_5','1real','nota_2','5cent','nota50','50cent'])
                                       
-# image = utils.read_image('frames/dinheiro13.jpg')
+# image = utils.read_image('321321.jpg')
 # predictions = model.predict_top(image)
 # labels, boxes, scores = predictions
 # visualize.show_labeled_image(image, boxes, labels)
@@ -22,7 +18,8 @@ cap = cv2.VideoCapture(0)
 while cap.isOpened():
     ret, frame = cap.read()
 
-    predictions = model.predict_top(frame)
+    predictions = model.predict(frame)
+    print(predictions)
     labels, boxes, scores = predictions
 
     try:
@@ -32,7 +29,7 @@ while cap.isOpened():
         max_value = max(scores_numpy)
 
         max_index = np.argmax(scores_numpy)
-        detectado = (max_value > 0.5)
+        detectado = (max_value > 0.7)
         label_detectado = labels[max_index]
         # Quando detectar um score maio que 0.7, iremos ter o retorno sonoro da detecção
         #'nota10','nota20','nota100','25cent','nota_5','1real','nota_2','5cent','maca','nota50','50cent'

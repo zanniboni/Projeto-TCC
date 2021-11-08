@@ -7,7 +7,7 @@ import numpy as np
 
 model = core.Model.load('notas_final.pth', ['nota_10','nota20','nota100','25cent','nota_5','1real','nota_2','5cent','nota50','50cent'])
                                       
-# image = utils.read_image('321321.jpg')
+# image = utils.read_image('IMG-1335.jpg')
 # predictions = model.predict_top(image)
 # labels, boxes, scores = predictions
 # print(labels, scores)
